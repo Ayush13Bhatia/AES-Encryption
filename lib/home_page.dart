@@ -47,9 +47,6 @@ class _HomePageState extends State<HomePage> {
                   TextSpan(
                     text: EncryptData.encrypted != null ? EncryptData.encrypted!.base64 : '',
                   ),
-
-                  // TextSpan(text: "$encrypted" != null ? encrypted.base64 : ""),
-                  // TextSpan(text: "${encrypter.encrypt(_controller.text, iv: iv)}"),
                 ],
               ),
             ),
@@ -84,9 +81,6 @@ class _HomePageState extends State<HomePage> {
                   TextSpan(
                     text: FernetEcryption.fernetEncrypted != null ? FernetEcryption.fernetEncrypted!.base64 : '',
                   ),
-
-                  // TextSpan(text: "$encrypted" != null ? encrypted.base64 : ""),
-                  // TextSpan(text: "${encrypter.encrypt(_controller.text, iv: iv)}"),
                 ],
               ),
             ),
@@ -114,7 +108,6 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     setState(() {
                       EncryptData.encryptedAES(_controller.text);
-                      // EncryptData.encryptFernet(_controller.text);
                     });
                   },
                   child: const Text("AESEcrytp"),
@@ -126,7 +119,6 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     setState(() {
                       EncryptData.dencryptedAES(_controller.text);
-                      // EncryptData.dencryptedAES(_controller.text);
                     });
                   },
                   child: const Text("AESDecrypt"),
