@@ -1,6 +1,8 @@
 import 'package:encrypted_app/ecrypted_text.dart';
 import 'package:flutter/material.dart';
 
+import 'fernet_encryption.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -37,7 +39,7 @@ class _HomePageState extends State<HomePage> {
             ),
             RichText(
               text: TextSpan(
-                text: "Ecrypted Text:- ",
+                text: "Ecrypted AES Text:- ",
                 style: const TextStyle(
                   color: Colors.black,
                 ),
@@ -56,12 +58,49 @@ class _HomePageState extends State<HomePage> {
             ),
             RichText(
               text: TextSpan(
-                text: "Decrypted Text:- ",
+                text: "Decrypted AES Text:- ",
                 style: const TextStyle(
                   color: Colors.black,
                 ),
                 children: [
                   TextSpan(text: EncryptData.decrypted ?? ""),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Text("Salsa algorithm"),
+            RichText(
+              text: TextSpan(
+                text: "fernetEcrypted  Text:- ",
+                style: const TextStyle(
+                  color: Colors.black,
+                ),
+                children: [
+                  TextSpan(
+                    text: FernetEcryption.fernetEncrypted != null ? FernetEcryption.fernetEncrypted!.base64 : '',
+                  ),
+
+                  // TextSpan(text: "$encrypted" != null ? encrypted.base64 : ""),
+                  // TextSpan(text: "${encrypter.encrypt(_controller.text, iv: iv)}"),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            RichText(
+              text: TextSpan(
+                text: "fernetDecrypted Text:- ",
+                style: const TextStyle(
+                  color: Colors.black,
+                ),
+                children: [
+                  TextSpan(text: FernetEcryption.fernetDecrypted ?? ""),
                 ],
               ),
             ),
@@ -75,10 +114,10 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     setState(() {
                       EncryptData.encryptedAES(_controller.text);
-                      // encrypter.encrypt(_controller.text, iv: iv);
+                      // EncryptData.encryptFernet(_controller.text);
                     });
                   },
-                  child: const Text("Ecrytp"),
+                  child: const Text("AESEcrytp"),
                 ),
                 const SizedBox(
                   width: 10,
@@ -87,10 +126,34 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     setState(() {
                       EncryptData.dencryptedAES(_controller.text);
-                      // encrypter.decrypt(encrypted, iv: iv);
+                      // EncryptData.dencryptedAES(_controller.text);
                     });
                   },
-                  child: const Text("Decrypt"),
+                  child: const Text("AESDecrypt"),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      FernetEcryption.encryptFernet(_controller.text);
+                    });
+                  },
+                  child: const Text("FernetEcrytp"),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      FernetEcryption.decryptFernet(_controller.text);
+                    });
+                  },
+                  child: const Text("FernetDecrypt"),
                 ),
               ],
             ),
